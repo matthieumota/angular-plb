@@ -32,71 +32,58 @@ var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, 
     if (target) Object.defineProperty(target, contextIn.name, descriptor);
     done = true;
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
 // Le typage en typescript
-var firstname = 'Fiorella';
-var age = 4;
-var contacts = ['A', 'B', 'C'];
-var contacts2 = ['A', 'B', 'C'];
-var myColor = 'blue';
+const firstname = 'Fiorella';
+let age = 4;
+const contacts = ['A', 'B', 'C'];
+const contacts2 = ['A', 'B', 'C'];
+const myColor = 'blue';
 // Typage des fonctions
 function addition(a, b) {
     return a + b;
 }
 console.log(addition(1, 2));
 // Fonctions raccourcies (ES6)
-var substraction = function (a, b) { return a - b; };
+const substraction = (a, b) => a - b;
 console.log(substraction(2, 1));
-var Log = function () {
-    return function (originalMethod, context) {
-        console.log("call ".concat(context.kind, " ").concat(String(context.name)));
+const Log = () => {
+    return (originalMethod, context) => {
+        console.log(`call ${context.kind} ${String(context.name)}`);
         // On remplate la méthode par cette fonction (normale car this)...
-        return function () {
-            var args = [];
-            for (var _i = 0; _i < arguments.length; _i++) {
-                args[_i] = arguments[_i];
-            }
+        return function (...args) {
             console.log('LOG');
-            originalMethod.call.apply(originalMethod, __spreadArray([this], args, false));
+            originalMethod.call(this, ...args);
         };
     };
 };
-var Car = function () {
+let Car = (() => {
     var _a;
-    var _instanceExtraInitializers = [];
-    var _drive_decorators;
-    return _a = /** @class */ (function () {
-            function Car(color) {
+    let _instanceExtraInitializers = [];
+    let _drive_decorators;
+    return _a = class Car {
+            constructor(color) {
                 this.color = (__runInitializers(this, _instanceExtraInitializers), color);
                 this.wheel = 4;
                 this.speed = 0;
                 // this.color = color;
             }
-            Car.prototype.drive = function () {
-                console.log("my ".concat(this.color.value, " car is driving at ").concat(this.speed, "."));
-            };
-            return Car;
-        }()),
-        (function () {
-            var _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+            drive() {
+                console.log(`my ${this.color.value} car is driving at ${this.speed}.`);
+            }
+        },
+        (() => {
+            const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
             _drive_decorators = [Log()];
-            __esDecorate(_a, null, _drive_decorators, { kind: "method", name: "drive", static: false, private: false, access: { has: function (obj) { return "drive" in obj; }, get: function (obj) { return obj.drive; } }, metadata: _metadata }, null, _instanceExtraInitializers);
+            __esDecorate(_a, null, _drive_decorators, { kind: "method", name: "drive", static: false, private: false, access: { has: obj => "drive" in obj, get: obj => obj.drive }, metadata: _metadata }, null, _instanceExtraInitializers);
             if (_metadata) Object.defineProperty(_a, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
         })(),
         _a;
-}();
-var car = new Car({
-    name: 'Red', value: 'red',
-    display: function () { console.log(this.value); }
+})();
+const car = new Car({
+    name: 'Red', value: 'red', display() { console.log(this.value); }
 });
-var cars = [car];
+const cars = [car];
 car.drive();
 car.color.display();
+import { addTwoNumbers1 } from "./exercice";
+addTwoNumbers1(1, 2);
