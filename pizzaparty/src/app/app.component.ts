@@ -19,6 +19,11 @@ const PIZZAS: Pizza[] = [
 })
 export class AppComponent {
   title: string = 'pizzaparty';
-  pizza: Pizza = new Pizza(1, 'Reine', 12, '/assets/pizzas/reine.jpg');
+  selectedPizza!: Pizza; // Peut être undefined
   pizzas: Pizza[] = PIZZAS;
+
+  onSelect(pizza: Pizza): void {
+    this.selectedPizza = pizza; // Référence vers le même objet
+    this.selectedPizza = { ...pizza }; // Ici, on peut faire une copie de l'objet (spread operator)
+  }
 }

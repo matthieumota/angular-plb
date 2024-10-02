@@ -1,0 +1,21 @@
+:host {
+  // color: blue;
+}
+
+.pizzas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+
+  li:hover {
+    cursor: pointer;
+  }
+
+  .selected {
+    background-color: lightgray;
+  }
+
+  img {
+    width: 250px;
+  }
+}
