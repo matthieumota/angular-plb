@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "pretty": true,
+    "outDir": "./",
+    "experimentalDecorators": false
+  },
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": ["node_modules"]
+}
