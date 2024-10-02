@@ -1,0 +1,24 @@
+<h1>{{ title }}</h1>
+
+<h2>{{ pizza.name }} ({{ pizza.id }})</h2>
+<input type="text" [value]="pizza.name" (input)="pizza.name = $any($event.target).value">
+<input type="text" [(ngModel)]="pizza.name">
+<p>Prix: {{ pizza.price }}</p>
+<img [src]="pizza.image" [alt]="pizza.name">
+
+<h2>Les pizzas</h2>
+<ul class="pizzas">
+  <!-- <ng-template ngFor let-pizza [ngForOf]="pizzas"> -->
+    <li *ngFor="let pizza of pizzas">
+      <h3>{{ pizza.name }} ({{ pizza.id }})</h3>
+      <p>Prix: {{ pizza.price }}</p>
+      <img [src]="pizza.image" [alt]="pizza.name">
+    </li>
+  <!-- </ng-template> -->
+
+  @for (item of pizzas; track item.id) {
+    <li>
+      {{ item.name }} ({{ $index }})
+    </li>
+  }
+</ul>
