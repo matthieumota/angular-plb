@@ -20,11 +20,16 @@ const PIZZAS: Pizza[] = [
 })
 export class AppComponent {
   title: string = 'pizzaparty';
-  selectedPizza!: Pizza; // Peut être undefined
+  selectedPizza!: Pizza | null; // Peut être null
   pizzas: Pizza[] = PIZZAS;
 
   onSelect(pizza: Pizza): void {
     this.selectedPizza = pizza; // Référence vers le même objet
     this.selectedPizza = { ...pizza }; // Ici, on peut faire une copie de l'objet (spread operator)
+  }
+
+  unSelect(pizza: Pizza | null): void {
+    console.log("Evenement de l'enfant ", pizza);
+    this.selectedPizza = null;
   }
 }
