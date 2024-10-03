@@ -27,6 +27,10 @@ export class PizzaService {
     return this.http.put<Pizza>(`${BASE_URL}/pizzas/${pizza.id}`, pizza);
   }
 
+  searchPizzas(value: string): Observable<Pizza[]> {
+    return this.http.get<Pizza[]>(`${BASE_URL}/pizzas?q=${value}`);
+  }
+
   getIngredients(): Promise<Ingredient[]> {
     return Promise.resolve(INGREDIENTS);
   }

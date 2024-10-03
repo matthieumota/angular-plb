@@ -6,6 +6,7 @@ import { CounterComponent } from './components/counter/counter.component';
 import { PizzaService } from './services/pizza.service';
 import { Ingredient } from './models/ingredient';
 import { IngredientListComponent } from './components/ingredient-list/ingredient-list.component';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, Observable, Subject, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,8 @@ export class AppComponent implements OnInit {
   selectedPizza!: Pizza | null; // Peut être null
   pizzas: Pizza[] = [];
   ingredients: Ingredient[] = [];
+  terms = new BehaviorSubject<string>(''); // Observable et observer
+  pizzas$!: Observable<Pizza[]>;
 
   constructor(private pizzaService: PizzaService) {}
 
@@ -26,6 +29,12 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.pizzaService.getPizzas().subscribe(pizzas => this.pizzas = pizzas);
     this.pizzaService.getIngredients().then(ingredients => this.ingredients = ingredients);
+
+    this.pizzas$ = this.terms.pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+      switchMap((term: string) => this.pizzaService.searchPizzas(term))
+    );
   }
 
   onSelect(pizza: Pizza): void {
