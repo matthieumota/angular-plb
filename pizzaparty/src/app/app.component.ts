@@ -1,15 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Pizza } from './models/pizza';
 import { CommonModule } from '@angular/common';
-import { PizzaComponent } from "./components/pizza/pizza.component";
-import { CounterComponent } from "./counter/counter.component";
-
-const PIZZAS: Pizza[] = [
-  { id: 1, name: 'Reine', price: 12, image: '/assets/pizzas/reine.jpg' },
-  { id: 2, name: '4 fromages', price: 13, image: '/assets/pizzas/4-fromages.jpg' },
-  { id: 3, name: 'Orientale', price: 11, image: '/assets/pizzas/orientale.jpg' },
-  { id: 4, name: 'Cannibale', price: 9, image: '/assets/pizzas/cannibale.jpg' }
-];
+import { PizzaComponent } from './components/pizza/pizza.component';
+import { CounterComponent } from './components/counter/counter.component';
+import { PizzaService } from './services/pizza.service';
 
 @Component({
   selector: 'app-root',
@@ -18,10 +12,17 @@ const PIZZAS: Pizza[] = [
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title: string = 'pizzaparty';
   selectedPizza!: Pizza | null; // Peut être null
-  pizzas: Pizza[] = PIZZAS;
+  pizzas: Pizza[] = [];
+
+  constructor(private pizzaService: PizzaService) {}
+
+  // On initialise les données du composant après son initialisation
+  ngOnInit(): void {
+    this.pizzaService.getPizzas().then(pizzas => this.pizzas = pizzas);
+  }
 
   onSelect(pizza: Pizza): void {
     this.selectedPizza = pizza; // Référence vers le même objet

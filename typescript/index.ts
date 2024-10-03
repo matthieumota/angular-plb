@@ -64,6 +64,6 @@ const cars: Array<Car> = [car];
 car.drive();
 car.color.display();
 
-import { addTwoNumbers1 } from "./exercice";
+import { addTwoNumbers1 } from './exercice';
 
 addTwoNumbers1(1, 2);
