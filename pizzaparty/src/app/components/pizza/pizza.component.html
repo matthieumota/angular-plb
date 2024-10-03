@@ -6,6 +6,7 @@
     </div>
     <input type="text" [value]="pizza.name" (input)="pizza.name = $any($event.target).value">
     <input type="text" [(ngModel)]="pizza.name">
+    <button (click)="update()">Modifier</button>
     @if (pizza.ingredient) {
       <p>Prix: {{ pizza.price + pizza.ingredient.price }}</p>
       <p>

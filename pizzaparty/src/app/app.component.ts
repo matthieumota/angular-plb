@@ -24,13 +24,13 @@ export class AppComponent implements OnInit {
 
   // On initialise les données du composant après son initialisation
   ngOnInit(): void {
-    this.pizzaService.getPizzas().then(pizzas => this.pizzas = pizzas);
+    this.pizzaService.getPizzas().subscribe(pizzas => this.pizzas = pizzas);
     this.pizzaService.getIngredients().then(ingredients => this.ingredients = ingredients);
   }
 
   onSelect(pizza: Pizza): void {
     this.selectedPizza = pizza; // Référence vers le même objet
-    this.selectedPizza = { ...pizza }; // Ici, on peut faire une copie de l'objet (spread operator)
+    // this.selectedPizza = { ...pizza }; // Ici, on peut faire une copie de l'objet (spread operator)
   }
 
   unSelect(pizza: Pizza | null): void {
