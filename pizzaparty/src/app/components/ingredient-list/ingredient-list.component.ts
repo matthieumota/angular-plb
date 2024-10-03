@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Ingredient } from '../../models/ingredient';
 
 @Component({
@@ -9,4 +9,9 @@ import { Ingredient } from '../../models/ingredient';
 })
 export class IngredientListComponent {
   @Input() ingredients: Ingredient[] = [];
+  @Output() selected = new EventEmitter<Ingredient>();
+
+  onSelect(ingredient: Ingredient): void {
+    this.selected.emit(ingredient);
+  }
 }

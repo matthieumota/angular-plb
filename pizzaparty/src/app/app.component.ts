@@ -37,4 +37,10 @@ export class AppComponent implements OnInit {
     console.log("Evenement de l'enfant ", pizza);
     this.selectedPizza = null;
   }
+
+  addIngredient(event: Ingredient) {
+    if (this.selectedPizza) {
+      this.selectedPizza.ingredient = event
+    }
+  }
 }

@@ -7,7 +7,7 @@
 <app-pizza [pizza]="selectedPizza" (closed)="unSelect($event)" />
 
 @if (selectedPizza) {
-  <app-ingredient-list [ingredients]="ingredients" />
+  <app-ingredient-list [ingredients]="ingredients" (selected)="addIngredient($event)" />
 }
 
 <h2>Les pizzas</h2>

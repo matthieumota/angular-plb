@@ -6,7 +6,17 @@
     </div>
     <input type="text" [value]="pizza.name" (input)="pizza.name = $any($event.target).value">
     <input type="text" [(ngModel)]="pizza.name">
-    <p>Prix: {{ pizza.price }}</p>
-    <img [src]="pizza.image" [alt]="pizza.name">
+    @if (pizza.ingredient) {
+      <p>Prix: {{ pizza.price + pizza.ingredient.price }}</p>
+      <p>
+        Ingrédient choisi: {{ pizza.ingredient.name }}
+        <img [src]="pizza.ingredient.image" [alt]="pizza.ingredient.name" width="25px">
+      </p>
+    } @else {
+      <p>Prix: {{ pizza.price }}</p>
+    }
+    <div>
+      <img [src]="pizza.image" [alt]="pizza.name">
+    </div>
   </div>
 }
