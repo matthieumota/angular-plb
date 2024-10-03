@@ -1,0 +1,7 @@
+<div>
+  <button (click)="decrement()" [disabled]="value <= 0">-</button>
+  <p>{{ value }}</p>
+  @if (value < 10) {
+    <button (click)="increment()">+</button>
+  }
+</div>
