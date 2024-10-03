@@ -6,6 +6,10 @@
 
 <app-pizza [pizza]="selectedPizza" (closed)="unSelect($event)" />
 
+@if (selectedPizza) {
+  <app-ingredient-list [ingredients]="ingredients" />
+}
+
 <h2>Les pizzas</h2>
 <ul class="pizzas">
   <!-- <ng-template ngFor let-pizza [ngForOf]="pizzas"> -->

@@ -1,0 +1,8 @@
+<ul>
+  @for (ingredient of ingredients; track ingredient.id) {
+    <li>
+      {{ ingredient.name }}
+      <img [src]="ingredient.image" [alt]="ingredient.name" width="50" />
+    </li>
+  }
+</ul>
