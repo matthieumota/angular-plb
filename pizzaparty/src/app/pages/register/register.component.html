@@ -1,0 +1,20 @@
+<form (ngSubmit)="register()" #userForm="ngForm" [ngFormOptions]="{ updateOn: 'submit' }">
+  <div>
+    <label>Pseudo</label>
+    <input name="username" [(ngModel)]="user.username" required minlength="3" #username="ngModel">
+    <p *ngIf="username.dirty && username.hasError('required')">
+      Le pseudo est obligatoire
+    </p>
+    <p *ngIf="username.dirty && username.hasError('minlength')">
+      Le pseudo doit faire 3 caractères minimum (Encore {{ 3 - username.getError('minlength').actualLength }})
+    </p>
+  </div>
+  <div>
+    <label>Mot de passe</label>
+    <input type="password" name="password" [(ngModel)]="user.password" required #password="ngModel">
+    <p *ngIf="password.dirty && password.hasError('required')">
+      Le mot de passe est obligatoire
+    </p>
+  </div>
+  <button [disabled]="false && userForm.invalid">Inscription</button>
+</form>

@@ -5,6 +5,13 @@
 <nav>
   <a routerLink="/">Accueil</a>
   <a routerLink="/counter-exercice" [queryParams]="{a: 'b'}">Exercice counter</a>
+  <a routerLink="/inscription">Inscription</a>
+
+  <button (click)="authService.login('Fiorella')" *ngIf="!(authService.logged() | async)">Login</button>
+  <div *ngIf="authService.logged() | async">
+    {{ (authService.user | async)?.username }}
+    <button (click)="authService.logout()">Logout</button>
+  </div>
 </nav>
 
 <router-outlet />

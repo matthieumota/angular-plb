@@ -24,5 +24,12 @@
       "price": 9,
       "image": "/assets/pizzas/cannibale.jpg"
     }
+  ],
+  "users": [
+    {
+      "username": "Toto",
+      "password": "te",
+      "id": 1
+    }
   ]
 }

@@ -3,13 +3,15 @@ import { Pizza } from '../models/pizza';
 import { Ingredient } from '../models/ingredient';
 import { HttpClient } from '@angular/common/http';
 import { delay, Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 const INGREDIENTS: Ingredient[] = [
   { id: 1, name: 'Avocat', image: '/assets/ingredients/avocat.png', weight: 1, price: 1 },
   { id: 2, name: 'Tomate', image: '/assets/ingredients/tomate.png', weight: 1, price: 2 },
 ];
 
-const BASE_URL = 'http://localhost:3000'
+const BASE_URL = environment.url
+console.log(BASE_URL)
 
 @Injectable({
   providedIn: 'root',
