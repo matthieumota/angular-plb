@@ -1,0 +1,34 @@
+<app-pizza [pizza]="selectedPizza" (closed)="unSelect($event)" />
+
+@if (selectedPizza) {
+  <app-ingredient-list [ingredients]="ingredients" (selected)="addIngredient($event)" />
+}
+
+<h2>Les pizzas</h2>
+<input type="text" #inputSearch (input)="terms.next(inputSearch.value)">
+
+<ul class="pizzas">
+  <!-- <ng-template ngFor let-pizza [ngForOf]="pizzas"> -->
+    <li *ngFor="let pizza of pizzas$ | async"
+      (click)="onSelect(pizza)"
+      [class.selected]="selectedPizza && selectedPizza.id === pizza.id"
+      [ngClass]="{
+        selected: selectedPizza && selectedPizza.id === pizza.id,
+        unselected: !selectedPizza || selectedPizza.id !== pizza.id
+      }"
+    >
+      <h3>{{ pizza.name }} ({{ pizza.id }})</h3>
+      <p>Prix: {{ pizza.price }}</p>
+      <div>
+        <img [src]="pizza.image" [alt]="pizza.name">
+      </div>
+      <a [routerLink]="['/pizza', pizza.id]">Voir la pizza</a>
+    </li>
+  <!-- </ng-template> -->
+
+  @for (item of pizzas; track item.id) {
+    <li>
+      {{ item.name }} ({{ $index }})
+    </li>
+  }
+</ul>

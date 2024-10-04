@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
-  messages: string[] = ['a', 'b', 'c'];
+  private messages: string[] = [];
+  private messages$: Subject<string> = new Subject();
 
   addMessage(message: string) {
     this.messages.push(message);
+    this.messages$.next(message);
   }
 
   deleteMessage(message: string) {
@@ -16,5 +19,9 @@ export class MessageService {
 
   getMessages(): string[] {
     return this.messages;
+  }
+
+  getMessages$(): Subject<string> {
+    return this.messages$;
   }
 }

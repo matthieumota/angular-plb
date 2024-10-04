@@ -1,0 +1,8 @@
+@if (pizza) {
+    <h1>{{ pizza.name }}</h1>
+    <img [src]="pizza.image" [alt]="pizza.name" width="250px">
+
+    <a [routerLink]="['/pizza', next()]">Suivante</a>
+} @else {
+    <p>Chargement en cours...</p>
+}

@@ -23,6 +23,10 @@ export class PizzaService {
     );
   }
 
+  getPizza(id: number): Observable<Pizza> {
+    return this.http.get<Pizza>(`${BASE_URL}/pizzas/${id}`);
+  }
+
   updatePizza(pizza: Pizza): Observable<Pizza> {
     return this.http.put<Pizza>(`${BASE_URL}/pizzas/${pizza.id}`, pizza);
   }

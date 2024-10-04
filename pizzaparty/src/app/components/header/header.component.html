@@ -1,9 +1,9 @@
-<p *ngIf="messages$.length > 0">Vous avez {{ messages$.length }} messages</p>
+<p *ngIf="messages.length > 0">Vous avez {{ messages.length }} messages</p>
 
 <ul>
-    <li *ngFor="let message of messages$">
+    <li *ngFor="let message of messages$ | async">
         {{ message }}
 
-        <button (click)="delete(message)">X</button>
+        <button (click)="messageService.deleteMessage(message)">X</button>
     </li>
 </ul>
