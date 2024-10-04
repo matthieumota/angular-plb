@@ -19,5 +19,13 @@ describe('CounterComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    fixture.componentRef.setInput('value', 5);
+    const button = compiled.querySelectorAll('button')[1]; // increment
+    button?.click();
+    fixture.detectChanges(); // value = 1
+
+    expect(compiled.querySelector('p')?.textContent).toBe('6');
   });
 });
