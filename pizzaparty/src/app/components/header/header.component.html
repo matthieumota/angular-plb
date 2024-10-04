@@ -1,0 +1,9 @@
+<p *ngIf="messages$.length > 0">Vous avez {{ messages$.length }} messages</p>
+
+<ul>
+    <li *ngFor="let message of messages$">
+        {{ message }}
+
+        <button (click)="delete(message)">X</button>
+    </li>
+</ul>

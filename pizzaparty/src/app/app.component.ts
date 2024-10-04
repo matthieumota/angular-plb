@@ -7,11 +7,13 @@ import { PizzaService } from './services/pizza.service';
 import { Ingredient } from './models/ingredient';
 import { IngredientListComponent } from './components/ingredient-list/ingredient-list.component';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, Observable, Subject, switchMap } from 'rxjs';
+import { MessageService } from './services/message.service';
+import { HeaderComponent } from "./components/header/header.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, PizzaComponent, CounterComponent, IngredientListComponent],
+  imports: [CommonModule, PizzaComponent, CounterComponent, IngredientListComponent, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -23,7 +25,10 @@ export class AppComponent implements OnInit {
   terms = new BehaviorSubject<string>(''); // Observable et observer
   pizzas$!: Observable<Pizza[]>;
 
-  constructor(private pizzaService: PizzaService) {}
+  constructor(
+    private pizzaService: PizzaService,
+    private messageService: MessageService
+  ) {}
 
   // On initialise les données du composant après son initialisation
   ngOnInit(): void {
@@ -40,6 +45,8 @@ export class AppComponent implements OnInit {
   onSelect(pizza: Pizza): void {
     this.selectedPizza = pizza; // Référence vers le même objet
     // this.selectedPizza = { ...pizza }; // Ici, on peut faire une copie de l'objet (spread operator)
+
+    this.messageService.addMessage(`Vous avez choisi ${pizza.name}`);
   }
 
   unSelect(pizza: Pizza | null): void {
