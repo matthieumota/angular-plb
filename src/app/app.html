@@ -1,6 +1,35 @@
 <h1>{{ title }}</h1>
 
+@if (pizza) {
+  <h2>{{ pizza.name }}</h2>
+  <img [src]="pizza.image" [alt]="pizza.name">
+  <p>Prix: {{ pizza.price }}</p>
+  <input [(ngModel)]="pizza.name" class="border border-gray-400">
+  <input [value]="pizza.name" (input)="pizza.name = $event.target.value" class="border border-gray-400">
+}
+
 <app-pizza-selected [pizza]="pizza" />
+
+<div class="flex gap-8">
+  <app-counter />
+  <app-counter [value]="5" />
+</div>
+
+<div class="mt-6 flex gap-8 rounded border border-gray-300 p-4">
+  <div>
+    <button class="rounded border border-gray-300 px-3 py-1" (click)="launchDemoPlain()">
+      Changer la propriété simple dans 1.5s
+    </button>
+    <p class="mt-2">Propriété simple : {{ demoPlain }}</p>
+  </div>
+
+  <div>
+    <button class="rounded border border-gray-300 px-3 py-1" (click)="launchDemoSignal()">
+      Changer le signal dans 1.5s
+    </button>
+    <p class="mt-2">Signal : {{ demoSignal() }}</p>
+  </div>
+</div>
 
 <div class="max-w-5xl mx-auto">
   <ul class="grid grid-cols-2 lg:grid-cols-4 gap-8 mt-6">

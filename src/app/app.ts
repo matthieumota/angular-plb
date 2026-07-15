@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { Pizz, Pizza } from './models/pizza';
 import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { PizzaSelected } from "./components/pizza-selected/pizza-selected";
+import { Counter } from "./components/counter/counter";
 
 const PIZZAS: Pizza[] = [
   { id: 1, name: 'Reine', price: 12, image: '/assets/pizzas/reine.jpg' },
@@ -13,7 +14,7 @@ const PIZZAS: Pizza[] = [
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, NgClass, PizzaSelected],
+  imports: [FormsModule, NgClass, PizzaSelected, Counter],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -26,5 +27,20 @@ export class App {
     console.log(p)
 
     this.pizza = p
+  }
+
+  demoPlain = 'valeur initiale';
+  demoSignal = signal('valeur initiale');
+
+  launchDemoPlain(): void {
+    setTimeout(() => {
+      this.demoPlain = 'changé (setTimeout)';
+    }, 1500);
+  }
+
+  launchDemoSignal(): void {
+    setTimeout(() => {
+      this.demoSignal.set('changé (setTimeout)');
+    }, 1500);
   }
 }
