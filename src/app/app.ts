@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Pizz, Pizza } from './models/pizza';
 import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
+import { PizzaSelected } from "./components/pizza-selected/pizza-selected";
 
 const PIZZAS: Pizza[] = [
   { id: 1, name: 'Reine', price: 12, image: '/assets/pizzas/reine.jpg' },
@@ -12,7 +13,7 @@ const PIZZAS: Pizza[] = [
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, NgClass],
+  imports: [FormsModule, NgClass, PizzaSelected],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
