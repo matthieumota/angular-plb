@@ -5,6 +5,7 @@ import { NgClass } from '@angular/common';
 import { PizzaSelected } from "./components/pizza-selected/pizza-selected";
 import { Counter } from "./components/counter/counter";
 import { PizzaRepository } from './services/pizza-repository';
+import { MessageService } from './services/message-service';
 
 @Component({
   selector: 'app-root',
@@ -18,9 +19,19 @@ export class App implements OnInit {
   pizzaRepository = inject(PizzaRepository);
   pizzas = signal<Pizza[]>([]);
 
+  messageService = inject(MessageService);
+
   ngOnInit(): void {
     this.pizzaRepository.getPizzas().then(p => this.pizzas.set(p));
   }
+
+  addMessage(): void {
+    const types = ['success', 'error', 'info', 'warning'];
+    const type = types[Math.floor(Math.random() * types.length)];
+
+    this.messageService.addMessage({ text: 'test', type });
+  }
+
 
   onSelect(p: Pizza): void {
     console.log(p)
