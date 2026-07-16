@@ -1,6 +1,6 @@
 <h1>{{ title }}</h1>
 
-@if (pizza) {
+@if (pizza(); as pizza) {
   <h2>{{ pizza.name }}</h2>
   <img [src]="pizza.image" [alt]="pizza.name">
   <p>Prix: {{ pizza.price }}</p>
@@ -8,11 +8,11 @@
   <input [value]="pizza.name" (input)="pizza.name = $event.target.value" class="border border-gray-400">
 }
 
-<app-pizza-selected [pizza]="pizza" />
+<app-pizza-selected [pizza]="pizza()" />
 
 <div class="flex gap-8">
   <app-counter />
-  <app-counter [value]="5" />
+  <app-counter [initialValue]="5" />
 </div>
 
 <div class="mt-6 flex gap-8 rounded border border-gray-300 p-4">
@@ -38,15 +38,15 @@
         class="cursor-pointer"
         (click)="onSelect(pizza)"
         [ngClass]="{
-          'border': this.pizza === pizza,
-          'border-red-500': this.pizza === pizza && pizza.id === 1,
-          'border-blue-500': this.pizza === pizza && pizza.id === 2,
+          'border': this.pizza() === pizza,
+          'border-red-500': this.pizza() === pizza && pizza.id === 1,
+          'border-blue-500': this.pizza() === pizza && pizza.id === 2,
         }"
       >
         <span>{{ pizza.id }}: {{ pizza.name }}</span>
         <img
           class="hover:opacity-50 duration-300"
-          [class.opacity-50]="this.pizza === pizza"
+          [class.opacity-50]="this.pizza() === pizza"
           [src]="pizza.image"
           [alt]="pizza.name"
         >

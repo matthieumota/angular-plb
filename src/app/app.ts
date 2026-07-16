@@ -20,17 +20,19 @@ const PIZZAS: Pizza[] = [
 })
 export class App {
   protected readonly title = 'pizzaparty';
-  pizza?: Pizza;
+  pizza = signal<Pizza | undefined>(undefined);
   pizzas: Pizza[] = PIZZAS;
 
   onSelect(p: Pizza): void {
     console.log(p)
 
-    this.pizza = p
+    this.pizza.set(p)
+
+    setTimeout(() => this.pizza.set(undefined), 5000);
   }
 
   demoPlain = 'valeur initiale';
-  demoSignal = signal('valeur initiale');
+  demoSignal = signal<string>('valeur initiale du signal');
 
   launchDemoPlain(): void {
     setTimeout(() => {
@@ -40,7 +42,7 @@ export class App {
 
   launchDemoSignal(): void {
     setTimeout(() => {
-      this.demoSignal.set('changé (setTimeout)');
+      this.demoSignal.set('changé (setTimeout) du signal');
     }, 1500);
   }
 }

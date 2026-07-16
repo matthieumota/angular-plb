@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, Input, linkedSignal } from '@angular/core';
 
 @Component({
   selector: 'app-counter',
@@ -7,13 +7,15 @@ import { Component, Input } from '@angular/core';
   styleUrl: './counter.css',
 })
 export class Counter {
-  @Input() value = 0;
+  // @Input() value = 0;
+  initialValue = input(0);
+  value = linkedSignal(() => this.initialValue())
 
   increment(): void {
-    this.value++;
+    this.value.set(this.value() + 1);
   }
 
   decrement(): void {
-    this.value--;
+    this.value.set(this.value() - 1);
   }
 }
