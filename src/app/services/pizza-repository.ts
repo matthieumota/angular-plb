@@ -1,18 +1,14 @@
-import { Service } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { Pizza } from '../models/pizza';
-
-const PIZZAS: Pizza[] = [
-  { id: 1, name: 'Reine', price: 12, image: '/assets/pizzas/reine.jpg' },
-  { id: 2, name: '4 fromages', price: 13, image: '/assets/pizzas/4-fromages.jpg' },
-  { id: 3, name: 'Orientale', price: 11, image: '/assets/pizzas/orientale.jpg' },
-  { id: 4, name: 'Cannibale', price: 9, image: '/assets/pizzas/cannibale.jpg' }
-];
+import { HttpClient } from '@angular/common/http';
+import { lastValueFrom, Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Service()
 export class PizzaRepository {
-  getPizzas(): Promise<Pizza[]> {
-    return new Promise(resolve => {
-      setTimeout(() => resolve(PIZZAS), 1000);
-    });
+  http = inject(HttpClient);
+
+  getPizzas(): Observable<Pizza[]> {
+    return this.http.get<Pizza[]>(`${environment.API_URL}/pizzas`);
   }
 }

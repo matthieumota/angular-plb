@@ -6,6 +6,7 @@ import { PizzaSelected } from "./components/pizza-selected/pizza-selected";
 import { Counter } from "./components/counter/counter";
 import { PizzaRepository } from './services/pizza-repository';
 import { MessageService } from './services/message-service';
+import { delay, map, repeat } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,10 @@ export class App implements OnInit {
   messageService = inject(MessageService);
 
   ngOnInit(): void {
-    this.pizzaRepository.getPizzas().then(p => this.pizzas.set(p));
+    this.pizzaRepository.getPizzas().pipe(
+      delay(500),
+      // repeat(3),
+    ).subscribe(p => this.pizzas.update(c => [...c, ...p]));
   }
 
   addMessage(): void {
@@ -38,6 +42,6 @@ export class App implements OnInit {
 
     this.pizza.set(p)
 
-    setTimeout(() => this.pizza.set(undefined), 5000);
+    // setTimeout(() => this.pizza.set(undefined), 5000);
   }
 }
