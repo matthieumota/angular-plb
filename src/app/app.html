@@ -1,33 +1,12 @@
 <h1>{{ title }}</h1>
 <h2>{{ messageService.count() }}</h2>
 
-<app-pizza-selected [pizza]="pizza()" [loading]="loading()" />
+<nav>
+  <a routerLink="/">Accueil</a>
+  <a routerLink="/pizzas">Pizzas</a>
+</nav>
 
-<div class="max-w-5xl mx-auto">
-  <ul class="grid grid-cols-2 lg:grid-cols-4 gap-8 mt-6">
-    @for (pizza of pizzas(); track pizza.id;) {
-      <li
-        class="cursor-pointer"
-        [class.pointer-events-none]="loading()"
-        [class.opacity-50]="loading()"
-        (click)="onSelect(pizza)"
-        [ngClass]="{
-          'border': this.pizza() === pizza,
-          'border-red-500': this.pizza() === pizza && pizza.id === 1,
-          'border-blue-500': this.pizza() === pizza && pizza.id === 2,
-        }"
-      >
-        <span>{{ pizza.id }}: {{ pizza.name }}</span>
-        <img
-          class="hover:opacity-50 duration-300"
-          [class.opacity-50]="this.pizza() === pizza"
-          [src]="pizza.image"
-          [alt]="pizza.name"
-        >
-      </li>
-    }
-  </ul>
-</div>
+<router-outlet />
 
 <div class="flex gap-8">
   <app-counter />

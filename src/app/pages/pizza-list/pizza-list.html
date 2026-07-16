@@ -1,0 +1,27 @@
+<app-pizza-selected [pizza]="pizza()" [loading]="loading()" />
+
+<div class="max-w-5xl mx-auto">
+  <ul class="grid grid-cols-2 lg:grid-cols-4 gap-8 mt-6">
+    @for (pizza of pizzas(); track pizza.id;) {
+      <li
+        class="cursor-pointer"
+        [class.pointer-events-none]="loading()"
+        [class.opacity-50]="loading()"
+        (click)="onSelect(pizza)"
+        [ngClass]="{
+          'border': this.pizza() === pizza,
+          'border-red-500': this.pizza() === pizza && pizza.id === 1,
+          'border-blue-500': this.pizza() === pizza && pizza.id === 2,
+        }"
+      >
+        <span>{{ pizza.id }}: {{ pizza.name }}</span>
+        <img
+          class="hover:opacity-50 duration-300"
+          [class.opacity-50]="this.pizza() === pizza"
+          [src]="pizza.image"
+          [alt]="pizza.name"
+        >
+      </li>
+    }
+  </ul>
+</div>
