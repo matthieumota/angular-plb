@@ -11,4 +11,8 @@ export class PizzaRepository {
   getPizzas(): Observable<Pizza[]> {
     return this.http.get<Pizza[]>(`${environment.API_URL}/pizzas`);
   }
+
+  getPizza(id: number): Observable<Pizza> {
+    return this.http.get<Pizza>(`${environment.API_URL}/pizzas/${id}`);
+  }
 }

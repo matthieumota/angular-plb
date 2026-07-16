@@ -10,4 +10,5 @@ import { FormsModule } from '@angular/forms';
 })
 export class PizzaSelected {
   pizza = input<Pizza>()
+  loading = input(false)
 }

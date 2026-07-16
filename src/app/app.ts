@@ -19,6 +19,7 @@ export class App implements OnInit {
   pizza = signal<Pizza | undefined>(undefined);
   pizzaRepository = inject(PizzaRepository);
   pizzas = signal<Pizza[]>([]);
+  loading = signal(false);
 
   messageService = inject(MessageService);
 
@@ -37,10 +38,18 @@ export class App implements OnInit {
   }
 
   onSelect(p: Pizza): void {
-    console.log(p)
+    if (this.loading()) {
+      return;
+    }
 
-    this.pizza.set(p)
+    this.pizza.set(undefined);
+    this.loading.set(true);
 
-    // setTimeout(() => this.pizza.set(undefined), 5000);
+    this.pizzaRepository.getPizza(p.id).pipe(
+      delay(500),
+    ).subscribe(pizza => {
+      this.pizza.set(pizza);
+      this.loading.set(false);
+    });
   }
 }
