@@ -30,19 +30,4 @@ export class App {
 
     setTimeout(() => this.pizza.set(undefined), 5000);
   }
-
-  demoPlain = 'valeur initiale';
-  demoSignal = signal<string>('valeur initiale du signal');
-
-  launchDemoPlain(): void {
-    setTimeout(() => {
-      this.demoPlain = 'changé (setTimeout)';
-    }, 1500);
-  }
-
-  launchDemoSignal(): void {
-    setTimeout(() => {
-      this.demoSignal.set('changé (setTimeout) du signal');
-    }, 1500);
-  }
 }
