@@ -36,7 +36,6 @@ export class App implements OnInit {
     this.messageService.addMessage({ text: 'test', type });
   }
 
-
   onSelect(p: Pizza): void {
     console.log(p)
 
