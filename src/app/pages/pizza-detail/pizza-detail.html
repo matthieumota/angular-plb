@@ -1,0 +1,8 @@
+<div class="max-w-5xl mx-auto">
+  <h1>{{ pizza()?.name }}</h1>
+  <img [src]="pizza()?.image" [alt]="pizza()?.name" class="object-cover rounded">
+
+  @if (hasError()) {
+    <h1>La pizza n'existe pas</h1>
+  }
+</div>

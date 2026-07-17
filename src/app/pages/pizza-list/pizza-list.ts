@@ -4,10 +4,11 @@ import { Pizza } from '../../models/pizza';
 import { PizzaRepository } from '../../services/pizza-repository';
 import { delay } from 'rxjs';
 import { NgClass } from '@angular/common';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-pizza-list',
-  imports: [PizzaSelected, NgClass],
+  imports: [PizzaSelected, NgClass, RouterLink],
   templateUrl: './pizza-list.html',
   styleUrl: './pizza-list.css',
 })
@@ -19,7 +20,7 @@ export class PizzaList implements OnInit {
 
   ngOnInit(): void {
     this.pizzaRepository.getPizzas().pipe(
-      delay(500),
+      delay(100),
       // repeat(3),
     ).subscribe(p => this.pizzas.update(c => [...c, ...p]));
   }

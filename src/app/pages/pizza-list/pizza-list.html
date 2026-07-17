@@ -21,6 +21,9 @@
           [src]="pizza.image"
           [alt]="pizza.name"
         >
+        <a [routerLink]="['/pizzas', pizza.id]">
+          Voir la pizza
+        </a>
       </li>
     }
   </ul>
