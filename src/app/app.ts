@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MessageService } from './services/message-service';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { NavLink } from "./components/nav-link/nav-link";
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, RouterOutlet, RouterLink, NavLink],
+  imports: [FormsModule, RouterOutlet, NavLink],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
