@@ -1,6 +1,37 @@
 <div class="max-w-5xl mx-auto">
   <h1>{{ title() }}</h1>
 
+  <form (ngSubmit)="save(myForm)" #myForm="ngForm" title="TEST">
+    <div class="mb-3">
+      <label class="block" [class.text-red-500]="name.dirty && name.invalid">Nom</label>
+      <input name="name" [(ngModel)]="pizzaDraft.name" class="border rounded-md" required minlength="3" #name="ngModel" [class.border-red-500]="name.dirty && name.invalid">
+      @if (name.dirty && name.invalid) {
+        <p class="text-red-500">
+          @if (name.hasError('minlength')) {
+            Le nom doit faire 3 caracteres.
+          } @else {
+            Le nom n'est pas correct.
+          }
+        </p>
+      }
+    </div>
+    @if (name.valid) {
+      <div class="mb-3">
+        <label class="block" [class.text-red-500]="price.dirty && price.invalid">Prix</label>
+        <input type="number" name="price" [(ngModel)]="pizzaDraft.price" class="border rounded-md" required min="1" #price="ngModel" [class.border-red-500]="price.dirty && price.invalid">
+        @if (price.dirty && price.invalid) {
+          <p class="text-red-500">Le prix n'est pas correct.</p>
+        }
+      </div>
+    }
+    <button
+      class="bg-gray-800 text-white py-1 px-4 rounded-lg disabled:opacity-50"
+      [disabled]="myForm.invalid"
+    >
+      {{ isEdit() ? 'Modifier' : 'Creer' }}
+    </button>
+  </form>
+
   <p>
     {{ 'title' | uppercase | lowercase | uppercase }}
   </p>

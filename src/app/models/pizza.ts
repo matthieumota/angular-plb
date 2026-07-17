@@ -18,3 +18,9 @@ export type Pizz = {
   price: number
   image?: string
 }
+
+export type PizzaDraft = {
+  name: string
+  price: string | undefined
+  image: string
+}
