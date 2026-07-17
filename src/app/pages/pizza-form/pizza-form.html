@@ -1,0 +1,14 @@
+<div class="max-w-5xl mx-auto">
+  <h1>{{ title() }}</h1>
+
+  <p>
+    {{ 'title' | uppercase | lowercase | uppercase }}
+  </p>
+
+  <p>{{ test | json }}</p>
+
+  <p>{{ amount | currency: 'EUR' : 'symbol' : '1.2-2' : 'en' }}</p>
+
+  <p>{{ activatedRoute.params | async | json }}</p>
+  <p>{{ $pizzas | async | json }}</p>
+</div>

@@ -1,6 +1,10 @@
 <app-pizza-selected [pizza]="pizza()" [loading]="loading()" />
 
 <div class="max-w-5xl mx-auto">
+  <a routerLink="/pizzas/new">Créer une pizza</a>
+</div>
+
+<div class="max-w-5xl mx-auto">
   <ul class="grid grid-cols-2 lg:grid-cols-4 gap-8 mt-6">
     @for (pizza of pizzas(); track pizza.id;) {
       <li
